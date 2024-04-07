@@ -6,42 +6,28 @@ import { BrowserRouter } from "react-router-dom";
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/react'
 
 // 1. Get projectId
-const projectId = 'e348b0095cc0aeb957d0376cd345b4e7'
+const projectId = '2e72c74431a877a44c348a86c109a817'
 
 // 2. Set chains
-const mainnet = {
-  chainId: 1,
-  name: 'Ethereum',
-  currency: 'ETH',
-  explorerUrl: 'https://etherscan.io',
-  rpcUrl: 'https://cloudflare-eth.com'
+const testnet = {
+  chainId: 11155111,
+  name: 'Sepolia Testnet',
+  currency: 'SepoliaETH',
+  explorerUrl: 'https://sepolia.etherscan.io/',
+  rpcUrl: 'https://1rpc.io/sepolia'
 }
 
 // 3. Create a metadata object
 const metadata = {
-  name: 'My Website',
+  name: 'Storator',
   description: 'My Website description',
   url: 'https://mywebsite.com', // origin must match your domain & subdomain
   icons: ['https://avatars.mywebsite.com/']
 }
 
-// 4. Create Ethers config
-const ethersConfig = defaultConfig({
-  /*Required*/
-  metadata,
-
-  /*Optional*/
-  enableEIP6963: true, // true by default
-  enableInjected: true, // true by default
-  enableCoinbase: true, // true by default
-  rpcUrl: '...', // used for the Coinbase SDK
-  defaultChainId: 1, // used for the Coinbase SDK
-})
-
-// 5. Create a Web3Modal instance
 createWeb3Modal({
-  ethersConfig,
-  chains: [mainnet],
+  ethersConfig: defaultConfig({ metadata }),
+  chains: [testnet],
   projectId,
   enableAnalytics: true // Optional - defaults to your Cloud configuration
 })

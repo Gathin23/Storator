@@ -8,11 +8,11 @@ const Home = () => {
   
   return (
     <div>
-      <div onClick={() => open()} className="flex justify-end mr-5 mt-5">
+      {/* <div onClick={() => open()} className="flex justify-end mr-5 mt-5">
         <button className="border-2 border-dashed rounded-full border-black px-3 py-2 hover:border-solid">
           {isConnected ? "Connected" : "Connect Wallet"}
         </button>
-      </div>
+      </div> */}
       <div className="flex flex-col mt-20">
         <span className="ml-10 text-9xl font-bold ">Storator</span>
         <span className="mt-5 ml-10 text-4xl font-medium">
@@ -20,10 +20,16 @@ const Home = () => {
         </span>
       </div>
       <button
-        onClick={() => navigate("/connect")}
+        onClick={() => {
+            if (isConnected) {
+              navigate("/connect");
+            } else {
+              open();
+            }
+          }}
         className="mt-10 text-2xl ml-10 border-2 border-dashed rounded-full border-black px-3 py-2 hover:border-solid"
       >
-        Get Started
+        {isConnected ? "Get Started" : "Connect Wallet"}
       </button>
     </div>
   );
