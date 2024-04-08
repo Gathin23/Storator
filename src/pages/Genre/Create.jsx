@@ -6,11 +6,10 @@ import {
 import { abi } from "../../constants/abi";
 import { ethers } from "ethers";
 import { useState } from "react";
-import { useNavigate} from "react-router-dom"
-
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
-  const { story,setStory } = useStoryContext();
+  const { story, setStory } = useStoryContext();
   const { walletProvider } = useWeb3ModalProvider();
   const navigate = useNavigate();
   const [storylineOptions, setStorylineOptions] = useState({});
@@ -18,11 +17,10 @@ const Create = () => {
   let contractAddress = "0x64BF816c3b90861a489A8eDf3FEA277cE1Fa0E82";
 
   let prompt = `
-  role : assume that you are the storyteller who tells interesting stories.
-  initial part of the story: ${story}
-  theme: fantasy
-  Now provide four different ways in which the story could proceed.
-  Give the output in json format with keys as option1 option2 option3 option4 with corresponding story progress.
+  Role : Assume that you are the storyteller who tells interesting stories.
+  For the given story beginning give four possible ways the story could continue with each option under 20 words as output in json format with keys as option1 option2 option3 option4 with corresponding story continuation.
+  Story beginning : ${story}
+  Theme: fantasy
   error correction1 : make sure each option does not exceed with 20 words
   error correction2 : only print the json output with no extra text.`;
 
@@ -46,21 +44,26 @@ const Create = () => {
     let endIndex = result.lastIndexOf("}") + 1;
     let jsonResult = result.substring(startIndex, endIndex);
     let parsedResult = JSON.parse(jsonResult);
+    console.log(parsedResult);
     setStorylineOptions(parsedResult);
   };
 
   const handleStorylineClick = (storyline) => {
+    if(storyline === undefined) return;
     const finalStory = story.concat(" ", storyline);
     setStory(finalStory);
     setStorylineOptions({});
-
   };
 
   return (
     <div className="flex flex-row">
       <div className="w-1/2">
-        <div className="h-96 m-10 border-2 border-dashed">
-          <span className="text-2xl text-white">{story}</span>
+        <div className="h-auto m-10 border-2 border-dashed">
+          <div className="m-4">
+            <span className="text-xl text-white">
+              {story}
+            </span>
+          </div>
         </div>
         <button
           onClick={generateStoryline}
@@ -76,17 +79,45 @@ const Create = () => {
         </button>
       </div>
       <div className="w-1/2">
-        <div onClick={() => handleStorylineClick(storylineOptions.option1)} className="h-32 m-10 border-2 border-dashed">
-          <span className="text-lg text-white">{storylineOptions.option1}</span>
+        <div
+          onClick={() => handleStorylineClick(storylineOptions.option1)}
+          className="h-32 m-10 border-2 border-dashed"
+        >
+          <div className="m-4">
+            <span className="text-lg text-white">
+              {storylineOptions.option1}
+            </span>
+          </div>
         </div>
-        <div onClick={() => handleStorylineClick(storylineOptions.option2)} className="h-32 m-10 border-2 border-dashed">
-          <span className="text-lg text-white">{storylineOptions.option2}</span>
+        <div
+          onClick={() => handleStorylineClick(storylineOptions.option1)}
+          className="h-32 m-10 border-2 border-dashed"
+        >
+          <div className="m-4">
+            <span className="text-lg text-white">
+              {storylineOptions.option2}
+            </span>
+          </div>
         </div>
-        <div onClick={() => handleStorylineClick(storylineOptions.option3)} className="h-32 m-10 border-2 border-dashed">
-          <span className="text-lg text-white">{storylineOptions.option3}</span>
+        <div
+          onClick={() => handleStorylineClick(storylineOptions.option1)}
+          className="h-32 m-10 border-2 border-dashed"
+        >
+          <div className="m-4">
+            <span className="text-lg text-white">
+              {storylineOptions.option2}
+            </span>
+          </div>
         </div>
-        <div onClick={() => handleStorylineClick(storylineOptions.option4)} className="h-32 m-10 border-2 border-dashed">
-          <span className="text-lg text-white">{storylineOptions.option4}</span>
+        <div
+          onClick={() => handleStorylineClick(storylineOptions.option1)}
+          className="h-32 m-10 border-2 border-dashed"
+        >
+          <div className="m-4">
+            <span className="text-lg text-white">
+              {storylineOptions.option4}
+            </span>
+          </div>
         </div>
       </div>
     </div>
