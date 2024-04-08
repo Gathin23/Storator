@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/react'
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/react';
+import {StoryProvider} from "./context/StoryContext.jsx";
 
 // 1. Get projectId
 const projectId = '2e72c74431a877a44c348a86c109a817'
@@ -35,7 +36,9 @@ createWeb3Modal({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <StoryProvider>
+        <App />
+      </StoryProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

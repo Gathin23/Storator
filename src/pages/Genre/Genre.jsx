@@ -7,9 +7,9 @@ const Genre = () => {
 return (
     <div className="flex flex-col m-10">
         <div className="flex flex-row justify-evenly">
-            <CardComponent genre="Fantasy" image={fantasy} path="/fantasy"/>
-            <CardComponent genre="Horror" image={horror} path="/horror"/>
-            <CardComponent genre="Anime" image={anime} path="/anime"/>
+            <CardComponent genre="Fantasy" image={fantasy} path="/genre/fantasy"/>
+            <CardComponent genre="Horror" image={horror} path="/genre/horror"/>
+            <CardComponent genre="Anime" image={anime} path="/genre/anime"/>
         </div>
     </div>
 );

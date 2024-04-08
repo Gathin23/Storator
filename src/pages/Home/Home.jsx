@@ -5,7 +5,6 @@ const Home = () => {
   const navigate = useNavigate();
   const { open } = useWeb3Modal();
   const {isConnected } = useWeb3ModalAccount();
-
   return (
     <div>
       {/* <div onClick={() => open()} className="flex justify-end mr-5 mt-5">
