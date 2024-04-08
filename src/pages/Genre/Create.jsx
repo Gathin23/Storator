@@ -6,10 +6,13 @@ import {
 import { abi } from "../../constants/abi";
 import { ethers } from "ethers";
 import { useState } from "react";
+import { useNavigate} from "react-router-dom"
+
 
 const Create = () => {
-  const { story } = useStoryContext();
+  const { story,setStory } = useStoryContext();
   const { walletProvider } = useWeb3ModalProvider();
+  const navigate = useNavigate();
   const [storylineOptions, setStorylineOptions] = useState({});
   let contract = null;
   let contractAddress = "0x64BF816c3b90861a489A8eDf3FEA277cE1Fa0E82";
@@ -46,6 +49,13 @@ const Create = () => {
     setStorylineOptions(parsedResult);
   };
 
+  const handleStorylineClick = (storyline) => {
+    const finalStory = story.concat(" ", storyline);
+    setStory(finalStory);
+    setStorylineOptions({});
+
+  };
+
   return (
     <div className="flex flex-row">
       <div className="w-1/2">
@@ -66,25 +76,17 @@ const Create = () => {
         </button>
       </div>
       <div className="w-1/2">
-        <div className="h-32 m-10 border-2 border-dashed">
-          <span className="text-lg text-white">
-            {storylineOptions.option1}
-          </span>
+        <div onClick={() => handleStorylineClick(storylineOptions.option1)} className="h-32 m-10 border-2 border-dashed">
+          <span className="text-lg text-white">{storylineOptions.option1}</span>
         </div>
-        <div className="h-32 m-10 border-2 border-dashed">
-          <span className="text-lg text-white">
-            {storylineOptions.option2}
-          </span>
+        <div onClick={() => handleStorylineClick(storylineOptions.option2)} className="h-32 m-10 border-2 border-dashed">
+          <span className="text-lg text-white">{storylineOptions.option2}</span>
         </div>
-        <div className="h-32 m-10 border-2 border-dashed">
-          <span className="text-lg text-white">
-            {storylineOptions.option3}
-          </span>
+        <div onClick={() => handleStorylineClick(storylineOptions.option3)} className="h-32 m-10 border-2 border-dashed">
+          <span className="text-lg text-white">{storylineOptions.option3}</span>
         </div>
-        <div className="h-32 m-10 border-2 border-dashed">
-          <span className="text-lg text-white">
-            {storylineOptions.option4}
-          </span>
+        <div onClick={() => handleStorylineClick(storylineOptions.option4)} className="h-32 m-10 border-2 border-dashed">
+          <span className="text-lg text-white">{storylineOptions.option4}</span>
         </div>
       </div>
     </div>

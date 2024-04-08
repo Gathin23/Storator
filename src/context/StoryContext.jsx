@@ -11,7 +11,7 @@ export const useStoryContext = () => {
     };
 
 export const StoryProvider = ({ children }) => {
-    const [story, setStory] = useState([]);
+    const [story, setStory] = useState("");
     return <StoryContext.Provider value={{
         story,
         setStory,
