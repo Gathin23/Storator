@@ -1,5 +1,5 @@
 import CardComponent from "./components/CardComponent";
-import anime from "../../assets/anime.png";
+import romance from "../../assets/romance.png";
 import fantasy from "../../assets/fantasy.png";
 import horror from "../../assets/horror.png";
 
@@ -9,7 +9,7 @@ return (
         <div className="flex flex-row justify-evenly">
             <CardComponent genre="Fantasy" image={fantasy} path="/genre/fantasy"/>
             <CardComponent genre="Horror" image={horror} path="/genre/horror"/>
-            <CardComponent genre="Anime" image={anime} path="/genre/anime"/>
+            <CardComponent genre="Romance" image={romance} path="/genre/romance"/>
         </div>
     </div>
 );
